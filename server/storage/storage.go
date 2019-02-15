@@ -20,6 +20,5 @@ type Quote struct {
 // Interface - контракт для драйвера хранилища котировок
 type Interface interface {
 	InitData() error                 // инициализирует хранилище данными с сервера Мосбиржи
-	Securities() ([]Security, error) // получить список бумаг
-	Add(Security) error              // добавить бумагу в список
+	Securities() ([]Security, error) // получить список бумаг с котировками
 }

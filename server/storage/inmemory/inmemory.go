@@ -1,3 +1,4 @@
+// Package inmemory реализует хранение данных в памяти
 package inmemory
 
 import (
