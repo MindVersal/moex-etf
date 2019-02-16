@@ -1,4 +1,4 @@
-// Package main реализует веб-сервер проетка moex-etf
+// Package main реализует веб-сервер проекта moex-etf
 package main
 
 import (
@@ -47,6 +47,8 @@ func securitiesHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	fmt.Println(db)
+
 	securities, err := db.Securities()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -81,10 +83,12 @@ func inflationHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 // инфляция в России по месяцам
-var inflation = []struct {
+type inflationType struct {
 	Year   int
 	Values [12]float64
-}{
+}
+
+var inflation = []inflationType{
 	{
 		Year:   2013,
 		Values: [12]float64{0.97, 0.56, 0.34, 0.51, 0.66, 0.42, 0.82, 0.14, 0.21, 0.57, 0.56, 0.51},

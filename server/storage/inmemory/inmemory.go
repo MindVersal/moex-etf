@@ -57,13 +57,16 @@ func (s *Storage) InitData() (err error) {
 		return err
 	}
 
+	// объект синхронизации горутин
 	var wg sync.WaitGroup
+
+	// увеличиваем счётчик горутин по количеству ценных бумаг
 	wg.Add(len(securities))
 
 	for _, security := range securities {
 
 		go func(item storage.Security) {
-
+			// уменьшаем счётчик перед завершением функции
 			defer wg.Done()
 
 			var quotes []storage.Quote
@@ -83,7 +86,7 @@ func (s *Storage) InitData() (err error) {
 		}(security)
 
 	}
-
+	// ожидаем выполнения всех горутин
 	wg.Wait()
 
 	return err
